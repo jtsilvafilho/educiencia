@@ -72,7 +72,8 @@
     subtituloTopo.textContent = subtitulo || "";
     destinoVoltar = voltarPara || "#/";
     btnVoltar.hidden = !voltarPara;
-    document.title = titulo === NOME_APP ? NOME_APP : titulo + " · " + NOME_APP;
+    /* Tela inicial sempre "EduCiência": é o nome que o Android usa se criar atalho pela página. */
+    document.title = !voltarPara || titulo === NOME_APP ? NOME_APP : titulo + " · " + NOME_APP;
   }
 
   /* Aulas que o aluno pode abrir; admin abre todas (prévia). */
