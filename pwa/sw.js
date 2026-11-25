@@ -1,5 +1,5 @@
 /* Service worker: casca do app em cache + dados do Supabase "rede primeiro". */
-var VERSAO = "v3";
+var VERSAO = "v4";
 var CACHE_CASCA = "aulas-casca-" + VERSAO;
 var CACHE_DADOS = "aulas-dados-" + VERSAO;
 var CASCA = [
@@ -40,6 +40,9 @@ self.addEventListener("fetch", function (e) {
   var req = e.request;
   if (req.method !== "GET") return;
   var url = new URL(req.url);
+
+  /* Requisição com sessão (admin em prévia ou modo teste): só rede, nunca fica no aparelho. */
+  if (/\/rest\/v1\//.test(url.pathname) && req.headers.has("Authorization")) return;
 
   /* Leitura pública do Supabase: config e aulas. Rede primeiro, cópia offline. */
   if (/\/rest\/v1\/(config|aulas)$/.test(url.pathname)) {
