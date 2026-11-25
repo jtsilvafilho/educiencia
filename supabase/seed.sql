@@ -3,21 +3,44 @@
 
 update public.config
 set titulo = 'Física 2º ano', professor = 'Prof. Silva',
-    descricao = 'Conteúdos complementares das aulas.', curso_disponivel = true
+    descricao = 'Conteúdos complementares das aulas.', modo = 'disponivel'
 where id = 1;
 
-insert into public.aulas (id, ordem, titulo, descricao, duracao, youtube_id) values
+insert into public.aulas (id, ordem, titulo, descricao, duracao, disponivel) values
   ('00000000-0000-0000-0000-0000000000a1', 1, 'Cinemática: movimento e velocidade',
-   'Revisão de posição, deslocamento e velocidade média, com exemplos do dia a dia.', '12 min', 'M7lc1UVf-VE'),
+   'Revisão de posição, deslocamento e velocidade média, com exemplos do dia a dia.', '12 min', true),
   ('00000000-0000-0000-0000-0000000000a2', 2, 'Leis de Newton',
-   'As três leis de Newton e como identificar forças em situações reais.', '18 min', null),
+   'As três leis de Newton e como identificar forças em situações reais.', '18 min', true),
   ('00000000-0000-0000-0000-0000000000a3', 3, 'Trabalho e energia',
-   'Conceito de trabalho de uma força, energia cinética e potencial.', '15 min', null);
+   'Conceito de trabalho de uma força, energia cinética e potencial.', '15 min', false);
 
-insert into public.recursos (aula_id, tipo, titulo, url, ordem) values
-  ('00000000-0000-0000-0000-0000000000a1', 'link', 'Simulador de movimento (PhET)', 'https://phet.colorado.edu/pt_BR/', 1),
-  ('00000000-0000-0000-0000-0000000000a1', 'link', 'Artigo complementar', 'https://pt.wikipedia.org/wiki/Cinem%C3%A1tica', 2),
-  ('00000000-0000-0000-0000-0000000000a2', 'link', 'Resumo das Leis de Newton', 'https://pt.wikipedia.org/wiki/Leis_de_Newton', 1);
+insert into public.cards (id, aula_id, ordem, titulo, descricao) values
+  ('00000000-0000-0000-0000-0000000000c1', '00000000-0000-0000-0000-0000000000a1', 0,
+   'Conteúdo da aula', 'Vídeo, leitura e links da aula.'),
+  ('00000000-0000-0000-0000-0000000000c2', '00000000-0000-0000-0000-0000000000a1', 1,
+   'Teste rápido', 'Duas perguntas para revisar.'),
+  ('00000000-0000-0000-0000-0000000000c3', '00000000-0000-0000-0000-0000000000a2', 0,
+   'Resumo', 'Leitura curta sobre as três leis.'),
+  ('00000000-0000-0000-0000-0000000000c4', '00000000-0000-0000-0000-0000000000a3', 0,
+   'Rascunho', 'Card de aula ainda indisponível.');
+
+insert into public.blocos (card_id, ordem, tipo, subtitulo, conteudo) values
+  ('00000000-0000-0000-0000-0000000000c1', 0, 'video', 'Vídeo da aula', '{"youtube_id":"M7lc1UVf-VE"}'),
+  ('00000000-0000-0000-0000-0000000000c1', 1, 'texto', 'Para lembrar',
+   '{"texto":"Velocidade média = deslocamento ÷ tempo.\nUnidade no SI: m/s.\n<b>Isto não vira HTML.</b>"}'),
+  ('00000000-0000-0000-0000-0000000000c1', 2, 'link', 'Links úteis',
+   '{"url":"https://phet.colorado.edu/pt_BR/","rotulo":"Simulador de movimento (PhET)"}'),
+  ('00000000-0000-0000-0000-0000000000c1', 3, 'link', '',
+   '{"url":"https://pt.wikipedia.org/wiki/Cinem%C3%A1tica","rotulo":"Artigo complementar"}'),
+  ('00000000-0000-0000-0000-0000000000c1', 4, 'arquivo', 'Material para baixar',
+   '{"storage_path":"00000000-0000-0000-0000-0000000000a1/exemplo.pdf","nome":"Lista de exercícios","tamanho_bytes":204800}'),
+  ('00000000-0000-0000-0000-0000000000c2', 0, 'quiz', 'Pergunta 1',
+   '{"pergunta":"Um carro anda 100 m em 10 s. Qual a velocidade média?","opcoes":["1 m/s","10 m/s","100 m/s"],"correta":1,"explicacao":"100 m ÷ 10 s = 10 m/s."}'),
+  ('00000000-0000-0000-0000-0000000000c2', 1, 'quiz', 'Pergunta 2',
+   '{"pergunta":"Qual a unidade de velocidade no SI?","opcoes":["km/h","m/s"],"correta":1}'),
+  ('00000000-0000-0000-0000-0000000000c3', 0, 'texto', '',
+   '{"texto":"1ª lei: inércia.\n2ª lei: F = m·a.\n3ª lei: ação e reação."}'),
+  ('00000000-0000-0000-0000-0000000000c4', 0, 'texto', 'Em preparo', '{"texto":"Conteúdo ainda não liberado."}');
 
 -- usuário admin local
 insert into auth.users (
