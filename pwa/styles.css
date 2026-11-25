@@ -122,6 +122,66 @@ main { max-width: 720px; margin: 0 auto; padding: 14px; outline: none; }
 }
 .nav-aulas { display: flex; justify-content: space-between; gap: 10px; margin-top: 22px; }
 .nav-aulas .btn { flex: 1; }
+/* Alvos de toque mínimos de 44 px. */
+.icon-btn, .install-btn, .banner-close, .btn { min-height: 44px; min-width: 44px; }
+.busca { min-height: 44px; }
+
+/* Faixa de modo (admin) */
+.faixa {
+  padding: 8px 14px; font-size: 13px; font-weight: 600; text-align: center;
+  background: var(--azul-claro); color: var(--texto); border-bottom: 1px solid var(--borda);
+}
+.faixa.teste { background: #8a5a00; color: #fff; }
+
+/* Aulas indisponíveis */
+.chip-estado {
+  display: inline-block; margin-top: 4px; padding: 2px 8px; border-radius: 999px;
+  background: var(--borda); color: var(--texto); font-weight: 600;
+}
+.card-aula.bloqueada { opacity: .65; cursor: not-allowed; }
+.card-aula.previa { border-style: dashed; }
+
+/* Cards de conteúdo da aula */
+.lista-cards { gap: 8px; }
+.card-conteudo {
+  display: flex; align-items: center; justify-content: space-between; gap: 10px; min-height: 56px;
+  padding: 12px 14px; text-decoration: none; color: inherit;
+  background: var(--card); border: 1px solid var(--borda); border-radius: var(--raio);
+}
+.card-conteudo:active { background: var(--azul-claro); }
+.card-conteudo h3 { font-size: 15px; margin: 0; font-weight: 600; color: var(--texto); }
+.card-conteudo p { margin: 2px 0 0; font-size: 13px; color: var(--texto-2); }
+.card-conteudo .seta { font-size: 26px; color: var(--texto-2); line-height: 1; }
+
+/* Blocos */
+.bloco { margin-top: 18px; }
+.bloco h3 { font-size: 16px; margin: 0 0 8px; }
+.texto-bloco { white-space: pre-line; margin: 0; overflow-wrap: anywhere; }
+.item-link { min-height: 44px; overflow-wrap: anywhere; }
+
+/* Quiz */
+.quiz fieldset { border: 1px solid var(--borda); border-radius: var(--raio); background: var(--card); margin: 0 0 10px; padding: 12px; }
+.quiz legend { font-weight: 600; padding: 0 4px; }
+.opcao {
+  display: flex; align-items: center; gap: 10px; min-height: 44px; padding: 8px 10px; margin-top: 6px;
+  border: 1px solid var(--borda); border-radius: 10px; cursor: pointer;
+}
+.opcao input { width: 22px; height: 22px; margin: 0; flex: none; }
+.opcao.certa { border-color: var(--ok); box-shadow: inset 0 0 0 1px var(--ok); }
+.opcao.certa::after { content: "✓ certa"; margin-left: auto; color: var(--ok); font-size: 12px; font-weight: 600; }
+.opcao.errada { border-color: #c62828; box-shadow: inset 0 0 0 1px #c62828; }
+.opcao.errada::after { content: "✗ sua escolha"; margin-left: auto; color: #c62828; font-size: 12px; font-weight: 600; }
+@media (prefers-color-scheme: dark) {
+  .opcao.errada { border-color: #ff8a80; box-shadow: inset 0 0 0 1px #ff8a80; }
+  .opcao.errada::after { color: #ff8a80; }
+}
+.quiz-retorno { margin-top: 10px; font-size: 14px; }
+.quiz-retorno p { margin: 4px 0 0; }
+.quiz-retorno.ok strong { color: var(--ok); }
+.quiz-retorno .explicacao { color: var(--texto-2); white-space: pre-line; }
+
+.nav-aulas { flex-wrap: wrap; }
+
 .toast {
   position: fixed; left: 14px; right: 14px; bottom: calc(14px + env(safe-area-inset-bottom));
   padding: 10px 12px; font-size: 13px; text-align: center; border-radius: 10px;
