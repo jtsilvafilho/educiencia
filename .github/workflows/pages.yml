@@ -29,8 +29,9 @@ jobs:
             echo "Chave secreta encontrada em pwa/. Remova antes de publicar."; exit 1
           fi
       - run: touch pwa/.nojekyll
-      - uses: actions/upload-pages-artifact@v3
+      - uses: actions/upload-pages-artifact@v5
         with:
           path: pwa
+          include-hidden-files: true
       - id: deploy
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
