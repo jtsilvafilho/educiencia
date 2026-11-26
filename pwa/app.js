@@ -49,6 +49,22 @@
     }
   }
 
+  /* Converte [palavra](https://endereço) em link. O resto vira texto puro (nunca HTML). */
+  function textoComLinks(s) {
+    var partes = [];
+    var re = /\[([^\[\]\n]{1,200})\]\((https?:\/\/[^\s()]+)\)/gi;
+    var inicio = 0, m;
+    while ((m = re.exec(s))) {
+      var href = urlSegura(m[2]);
+      if (!href) continue;
+      if (m.index > inicio) partes.push(s.slice(inicio, m.index));
+      partes.push(el("a", { href: href, target: "_blank", rel: "noopener noreferrer", text: m[1] }));
+      inicio = re.lastIndex;
+    }
+    if (inicio < s.length) partes.push(s.slice(inicio));
+    return partes;
+  }
+
   function lerVistas() {
     try { return JSON.parse(localStorage.getItem(CHAVE_VISTAS)) || {}; } catch (e) { return {}; }
   }
@@ -222,7 +238,7 @@
     var c = b.conteudo || {};
     var corpo = null;
     if (b.tipo === "texto" && typeof c.texto === "string") {
-      corpo = el("p", { class: "texto-bloco", text: c.texto });
+      corpo = el("p", { class: "texto-bloco" }, textoComLinks(c.texto));
     } else if (b.tipo === "link") {
       var href = urlSegura(c.url);
       if (href) corpo = itemLink(c.rotulo || c.url, href, "Link ↗");

@@ -52,7 +52,7 @@ Dentro do card, use os botões **+ Texto**, **+ Link**, **+ Vídeo**, **+ Arquiv
 
 | Bloco | Como usar |
 |---|---|
-| **Texto** | Texto simples, até 10 mil caracteres. As quebras de linha são mantidas. Não aceita formatação nem HTML. |
+| **Texto** | Texto simples, até 10 mil caracteres. As quebras de linha são mantidas. Não aceita formatação nem HTML. Para um link dentro do texto, selecione a palavra e toque em **Inserir link**, ou escreva `[site](https://endereco)`: o aluno vê só "site", clicável. |
 | **Link** | Endereço começando com `https://` e, se quiser, um texto para o link. |
 | **Vídeo** | Link do YouTube. A miniatura confirma que o link está certo. |
 | **Arquivo** | Nome para o aluno e o arquivo. Para trocar o arquivo, exclua o bloco e crie outro. |

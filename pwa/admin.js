@@ -554,8 +554,19 @@
     if (tipo === "texto") {
       var texto = el("textarea", { maxlength: "10000", required: true, class: "alto" });
       texto.value = cont.texto || "";
+      var inserirLink = el("button", { class: "btn mini", type: "button", text: "Inserir link", onclick: function () {
+        var ini = texto.selectionStart, fim = texto.selectionEnd;
+        var palavra = texto.value.slice(ini, fim).trim() || window.prompt("Texto que vai aparecer (ex.: site):", "");
+        if (!palavra) return;
+        var endereco = (window.prompt("Endereço do link (https://...):", "https://") || "").trim();
+        if (!/^https?:\/\/[^\s()]+$/i.test(endereco)) { if (endereco && endereco !== "https://") alert("O endereço precisa começar com https:// e não pode ter espaços nem parênteses."); return; }
+        var trecho = "[" + palavra.replace(/[\[\]\n]/g, "") + "](" + endereco + ")";
+        texto.setRangeText(trecho, ini, fim, "end");
+        texto.focus();
+      } });
       campos.push(campo("Texto", texto));
-      campos.push(el("p", { class: "dica", text: "Texto simples. Quebras de linha são mantidas." }));
+      campos.push(el("div", { class: "acoes" }, [inserirLink]));
+      campos.push(el("p", { class: "dica", text: "Quebras de linha são mantidas. Para um link dentro do texto, selecione a palavra e toque em Inserir link, ou escreva [site](https://endereco)." }));
       lerConteudo = function () {
         if (!texto.value.trim()) throw new Error("Escreva o texto.");
         return { texto: texto.value.trim() };

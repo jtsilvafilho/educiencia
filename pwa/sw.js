@@ -1,5 +1,5 @@
 /* Service worker: casca do app em cache + dados do Supabase "rede primeiro". */
-var VERSAO = "v4";
+var VERSAO = "v5";
 var CACHE_CASCA = "aulas-casca-" + VERSAO;
 var CACHE_DADOS = "aulas-dados-" + VERSAO;
 var CASCA = [
