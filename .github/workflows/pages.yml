@@ -16,12 +16,11 @@ concurrency:
   group: pages
   cancel-in-progress: true
 
+# Dois jobs: o deploy roda depois que o artefato do build já está registrado.
+# No mesmo job, o deploy às vezes não achava o artefato ("Found 0 artifact(s)").
 jobs:
-  publicar:
+  build:
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deploy.outputs.page_url }}
     steps:
       - uses: actions/checkout@v5
       - name: Conferir que não há chave secreta no site
@@ -34,5 +33,13 @@ jobs:
         with:
           path: pwa
           include-hidden-files: true
+
+  publicar:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
       - id: deploy
         uses: actions/deploy-pages@v5
