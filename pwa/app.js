@@ -134,8 +134,12 @@
     busca.addEventListener("input", function () { desenhar(busca.value); });
     desenhar("");
 
+    /* Descrição do curso (campo do painel), só se preenchida. */
+    var descricao = (curso.descricao || "").trim();
+    var intro = descricao ? el("p", { class: "descricao-curso", text: descricao }) : null;
+
     app.textContent = "";
-    [busca, progresso, barra, lista].forEach(function (n) { app.appendChild(n); });
+    [intro, busca, progresso, barra, lista].forEach(function (n) { if (n) app.appendChild(n); });
   }
 
   function montarPlayer(video, tituloAula) {
